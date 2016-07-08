@@ -38,31 +38,40 @@ Install specific version of VirtualBox and virtualbox-dkms:
 ``` yaml
 - hosts: all
   roles:
-    - { role: hubisan.virtualbox, virtualbox_version: 4.2, virtualbox_install_dkms: yes }
+    - { role: hubisan.virtualbox, virtualbox_version: "4.2", virtualbox_install_dkms: yes }
 ```
 
 ## Installation
 
-### From Ansible Galaxy
+### Installation from Ansible Galaxy
 
-``` shell
-ansible-galaxy install hubisan.virtualbox
-```
+- On the command line:
+  ``` shell
+  ansible-galaxy install hubisan.virtualbox
+  ```
 
-### Installation From Github directly
+- Inside a playbook:  
+  Add the source to requirements.yml:
+  ``` shell
+  - src: hubisan.virtualbox
+  ```
+  And add the command to your playbook:
+  ``` yaml
+  - name: install requirements from ansible galaxy
+    command: ansible-galaxy install -r requirements.yml --ignore-errors
+  ```
 
-To download from GitHub directly add requirements.yml:
+### Installation from Github directly
 
+To install from GitHub directly add the source to requirements.yml:
 ``` yaml
-# Install role from GitHub
 - name: virtualbox
   src: https://github.com/hubisan/ansible-virtualbox
 ```
 
-and add this to your playbook:
-
+And add the command to your playbook:
 ``` yaml
-- name: run ansible galaxy
+- name: install requirements from ansible galaxy
   command: ansible-galaxy install -r requirements.yml --ignore-errors
 ```
 
