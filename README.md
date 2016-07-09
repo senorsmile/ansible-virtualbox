@@ -65,7 +65,7 @@ Install specific version of VirtualBox and virtualbox-dkms:
 
 To install from GitHub directly add the source to requirements.yml:
 ``` yaml
-- name: virtualbox
+- name: hubisan.virtualbox
   src: https://github.com/hubisan/ansible-virtualbox
 ```
 
