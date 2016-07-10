@@ -1,22 +1,26 @@
 ---
 # tasks file for virtualbox: ubuntu.yml
 - name: add virtualbox oracle apt key
-  sudo: yes
+  become: yes
+  become_method: sudo
   apt_key: url="{{ virtualbox_key_url }}" state=present
   tags: virtualbox
 
 - name: add virtualbox repository
-  sudo: yes
+  become: yes
+  become_method: sudo
   apt_repository: repo="{{ virtualbox_repo }}" state=present
   tags: virtualbox
 
 - name: install virtualbox
-  sudo: yes
+  become: yes
+  become_method: sudo
   apt: name="{{ virtualbox_pkg_name }}" state=present update_cache=yes
   tags: virtualbox
 
 - name: install virtualbox dkms package
-  sudo: yes
+  become: yes
+  become_method: sudo
   apt: name="{{ virtualbox_dkms_pkg_name }}" state=present
   when: virtualbox_install_dkms
   tags: virtualbox_dkms
