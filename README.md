@@ -27,6 +27,8 @@ None.
 
 ## Example Playbook
 
+Use the option '--ask-become-pass' (or alias '-K') when running playbook using this role with ansible-playbook (like 'ansible-playbook -i ./hosts vbox.yml -K').
+
 Install VirtualBox:
 ``` yaml
 - hosts: all
@@ -50,9 +52,9 @@ Install specific version of VirtualBox and virtualbox-dkms:
   ansible-galaxy install hubisan.virtualbox
   ```
 
-- Inside a playbook:  
+- Inside a playbook from requirements file:  
   Add the source to requirements.yml:
-  ``` shell
+  ``` yaml
   - src: hubisan.virtualbox
   ```
   And add the command to your playbook:
@@ -60,6 +62,7 @@ Install specific version of VirtualBox and virtualbox-dkms:
   - name: install requirements from ansible galaxy
     command: ansible-galaxy install -r requirements.yml --ignore-errors
   ```
+  This playbook has to be run before using the role in another playbook.
 
 ### Installation from Github directly
 
@@ -74,6 +77,7 @@ And add the command to your playbook:
 - name: install requirements from ansible galaxy
   command: ansible-galaxy install -r requirements.yml --ignore-errors
 ```
+This playbook has to be run before using the role in another playbook.
 
 ## License
 
