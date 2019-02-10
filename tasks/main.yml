@@ -2,12 +2,20 @@
 # tasks file for virtualbox: main.yml
 - name: Ubuntu
   include: ubuntu.yml
-  when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int >= 12
+  #when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int >= 12
+  when: 
+    - ansible_distribution == "Ubuntu"  
+    - ansible_distribution_version.split(".")[0]|int >= 12
 
 - name: not Ubuntu
-  fail: msg="role ansible-virtualbox only supports ubuntu and ubuntu version >= 12"
+  fail: 
+    msg: "role ansible-virtualbox only supports ubuntu and ubuntu version >= 12"
   when: ansible_distribution != "Ubuntu"
 
 - name: needs 12.04 or more
-  fail: msg="role ansible-virtualbox only supports ubuntu and ubuntu version >= 12"
-  when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int < 12
+  fail: 
+    msg: "role ansible-virtualbox only supports ubuntu and ubuntu version >= 12"
+  #when: ansible_distribution == "Ubuntu" and {{ ansible_distribution_version.split(".")[0] }}|int < 12
+  when: 
+    - ansible_distribution == "Ubuntu" 
+    -  ansible_distribution_version.split(".")[0]|int < 12
