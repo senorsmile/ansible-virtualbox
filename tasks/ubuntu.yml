@@ -1,7 +1,6 @@
 ---
 # tasks file for virtualbox: ubuntu.yml
 - name: add virtualbox oracle apt keys
-  become: yes
   apt_key: 
     url: "{{ item }}" 
     state: present
@@ -9,15 +8,19 @@
   tags: virtualbox
 
 - name: add virtualbox repository
-  become: yes
   apt_repository: 
     repo: "{{ virtualbox_repo }}" 
     state: present 
     mode: "0644"
   tags: virtualbox
+  register: add_vbox_repo
+
+- name: Apt update
+  apt:
+    update_cache: yes
+  when: ( add_vbox_repo.changed )
 
 - name: install virtualbox
-  become: yes
   apt: 
     name: "{{ virtualbox_pkg_name }}" 
     state: present 
@@ -25,7 +28,6 @@
   tags: virtualbox
 
 - name: install virtualbox dkms package
-  become: yes
   apt: 
     name: "{{ virtualbox_dkms_pkg_name }}" 
     state: present
