@@ -3,6 +3,6 @@
 virtualbox_key_urls: 
   - "https://www.virtualbox.org/download/oracle_vbox.asc"
   - "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
-virtualbox_repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
+virtualbox_repo: "deb http://download.virtualbox.org/virtualbox/debian {% if ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04' %}eoan{% else %}{{ ansible_distribution_release }}{% endif %} contrib"
 virtualbox_pkg_name: "virtualbox-{{ virtualbox_version }}"
 virtualbox_dkms_pkg_name: "virtualbox-dkms"
